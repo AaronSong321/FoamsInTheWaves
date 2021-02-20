@@ -10,17 +10,19 @@ using Object = UnityEngine.Object;
 
 namespace Finw
 {
-    public class FwinGameMode: GameMode
+    public class FitwGameMode: GameMode
     {
         [field: SerializeField] public int Year { get; set; }
         [SerializeField] private GameObject prefabManagerPrefab;
-        [ReadFromFactorySlot(nameof(FinwPrefabManager.nyGenerator), "nyRenderer")]
+        [ReadFromFactorySlot(nameof(FitwPrefabManager.nyGenerator), "nyRenderer")]
         public NewYearRenderer Renderer { get; private set; }
-        
+        [ReadFromFactorySlot(nameof(FitwPrefabManager.nyGenerator), "asyncNyRenderer")]
+        public AsyncNewYear Renderer2 { get; private set; }
+
         protected override void InitPrefabFactory()
         {
             var go = Instantiate(prefabManagerPrefab, Vector3.zero, Quaternion.identity, transform);
-            PrefabFactoryManager = go.GetComponent<FinwPrefabManager>();
+            PrefabFactoryManager = go.GetComponent<FitwPrefabManager>();
             Year = 2021;
         }
 
@@ -30,5 +32,7 @@ namespace Finw
             Renderer.Year = Year;
             Renderer.Celebrate();
         }
+        
+        
     }
 }

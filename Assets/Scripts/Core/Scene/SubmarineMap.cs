@@ -7,9 +7,8 @@ namespace Finw
     {
         private WaveGenerator waveGenerator;
         
-        protected override void SelfInit()
+        private void SelfInitImpl()
         {
-            base.SelfInit();
             waveGenerator = this.FindChildByName("Water").GetComponent<WaveGenerator>();
         }
     }

@@ -3,9 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Jmas;
 
 
-$HEADER$namespace $NAMESPACE$
+namespace Finw
 {
-  public class $CLASS$ {$END$}
+    [Serializable]
+    public class EndlessSorrowStory: StoryLine
+    {
+        //public InitOnlyRef<LittleMermaid> littleMermaid;
+        public int RandomInt { get; set; }
+    }
 }

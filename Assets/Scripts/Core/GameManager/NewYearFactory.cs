@@ -13,5 +13,7 @@ namespace Finw
     public class NewYearFactory: PrefabFactory
     {
         [SerializeField] private GameObject nyRenderer;
+        [SerializeField] private GameObject asyncNyRenderer;
+        
     }
 }

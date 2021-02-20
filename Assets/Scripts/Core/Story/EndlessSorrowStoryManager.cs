@@ -3,9 +3,27 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Jmas;
+using UnityEngine;
 
 
-$HEADER$namespace $NAMESPACE$
+namespace Finw
 {
-  public class $CLASS$ {$END$}
+    public class EndlessSorrowStoryManager: StoryManager
+    {
+        private EndlessSorrowStory story;
+        private FitwGameState gameState;
+
+        protected override void SelfInitImpl()
+        {
+            base.SelfInitImpl();
+            UseTestAccount();
+            DontDestroyOnLoad(this);
+            var g = GetGameSlots(SessionAccount).ToArray();
+            // DeleteGameSlot("1");
+            var gs = g.Length is 0 ? CreateGameSlot((g.Length+1).ToString()): ChooseGameSlot(g[0].Name);
+            var fitw = FitwGameState.MakeDefault();
+            fitw.Save(gs);
+        }
+    }
 }

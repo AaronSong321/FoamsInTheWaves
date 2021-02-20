@@ -14,9 +14,8 @@ namespace Finw
         [SerializeField] private GameObject wave;
         [SerializeField] private GameObject waterBase;
 
-        protected override void SelfInit()
+        private void SelfInitImpl()
         {
-            base.SelfInit();
             wave = this.FindChildByName("Wave");
             waterBase = this.FindChildByName("WaterBase");
             waterMeshFilter = wave.GetComponent<MeshFilter>();

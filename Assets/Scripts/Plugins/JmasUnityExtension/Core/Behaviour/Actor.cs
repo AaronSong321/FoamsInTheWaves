@@ -5,9 +5,12 @@ namespace Jmas
 {
     public interface IActor
     {
+        /// <summary>
+        /// Called to init this actor itself. It is guaranteed that every <see cref="IActor"/> statically registered in the <see cref="GameMode"/> calls <see cref="SelfInit"/> sooner than any <see cref="InterInit"/>.
+        /// It is the implementer's job to ensure this function is called only once on each <see cref="IActor"/>.
+        /// </summary>
         void SelfInit();
         void InterInit();
-        void OnUniAppQuit();
         IGameMode GetGameMode();
     }
 
@@ -18,11 +21,16 @@ namespace Jmas
     
     public class Actor : MonoBehaviour, IActor
     {
+        public static readonly string SelfInitName = "SelfInitImpl";
+        public static readonly string InterInitName = "InterInitImpl";
+        
         protected virtual void Awake()
         {
         }
         protected virtual void Start()
         {
+            SelfInit();
+            InterInit();
         }
         protected virtual void Update()
         {
@@ -32,49 +40,35 @@ namespace Jmas
         }
 
         private bool selfInitToken = false;
-        protected virtual void SelfInit()
+        public void SelfInit()
         {
-            if (selfInitToken)
-                throw new ReInitException($"Re SelfInit: {GetType()} at object {gameObject.name}");
+            if (!selfInitToken)
+                this.CallMessageMethod(SelfInitName);
             selfInitToken = true;
         }
-        void IActor.SelfInit()
-        {
-            SelfInit();
-        }
         private bool interInitToken = false;
-        protected virtual void InterInit()
+        public void InterInit()
         {
-            if (interInitToken)
-                throw new ReInitException($"Re InterInit: {GetType()} at object {gameObject.name}");
+            if (!interInitToken)
+                this.CallMessageMethod(InterInitName);
             interInitToken = true;
         }
-        void IActor.InterInit()
-        {
-            InterInit();
-        }
-        protected virtual void OnUniAppQuit()
-        {
-        }
-        void IActor.OnUniAppQuit()
-        {
-            OnUniAppQuit();
-        }
+        
         IGameMode IActor.GetGameMode()
         {
             return GameMode.Instance;
         }
 
-        protected void OnApplicationQuit()
-        {
-            if (!PlatformChecker.IsWinPhoneOrWinStore())
-                OnUniAppQuit();
-        }
-        protected void OnApplicationFocus(bool hasFocus)
-        {
-            if (!hasFocus && PlatformChecker.IsWinPhoneOrWinStore()) {
-                OnUniAppQuit();
-            }
-        }
+        // protected void OnApplicationQuit()
+        // {
+        //     if (!PlatformChecker.IsWinPhoneOrWinStore())
+        //         OnUniAppQuit();
+        // }
+        // protected void OnApplicationFocus(bool hasFocus)
+        // {
+        //     if (!hasFocus && PlatformChecker.IsWinPhoneOrWinStore()) {
+        //         OnUniAppQuit();
+        //     }
+        // }
     }
 }

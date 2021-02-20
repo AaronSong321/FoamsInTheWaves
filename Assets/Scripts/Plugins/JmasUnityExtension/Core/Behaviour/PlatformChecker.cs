@@ -8,6 +8,12 @@ using UnityEngine;
 
 namespace Jmas
 {
+    public enum SceneKind
+    {
+        Desktop,
+        Mobile
+    }
+    
     public static class PlatformChecker
     {
         public static bool IsWinPhoneOrWinStore()
@@ -24,6 +30,15 @@ namespace Jmas
         {
             var platform = Application.platform;
             return platform == RuntimePlatform.WebGLPlayer;
+        }
+        public static SceneKind GetSceneKind()
+        {
+            var platform = Application.platform;
+            return platform == RuntimePlatform.Android || platform == RuntimePlatform.IPhonePlayer ? SceneKind.Mobile : SceneKind.Desktop;
+        }
+        public static string GetSceneKindString()
+        {
+            return GetSceneKind().ToString();
         }
     }
 }

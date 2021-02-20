@@ -15,6 +15,7 @@ namespace Jmas
     {
         PrefabFactoryManager PrefabFactoryManager { get; }
         event Action<float> GameTimeTicker;
+        event Action<float> FixedGameTimeTicker;
         float DeltaTime { get; }
         float TimeScale { get; }
         float CurrentTime { get; }
@@ -107,9 +108,9 @@ namespace Jmas
         {
             gameMode.SelfInit();
             gameMode.InitPrefabFactory();
+            gameMode.SetInitSlot();
             var fieldActors = gameMode.GetActors().ToList();
             fieldActors.ForEach(t => t.SelfInit());
-            gameMode.SetInitSlot();
             gameMode.InterInit();
             fieldActors.ForEach(t => t.InterInit());
         }
@@ -119,6 +120,7 @@ namespace Jmas
     {
         public static GameMode Instance { get; private set; }
         public event Action<float> GameTimeTicker;
+        public event Action<float> FixedGameTimeTicker;
         [field: SerializeField] public float TimeScale { get; protected set; } = 1f;
         public float DeltaTime {
             get => TimeScale * Time.deltaTime;
@@ -168,6 +170,11 @@ namespace Jmas
             base.Update();
             GameTimeTicker?.Invoke(DeltaTime);
             CurrentTime += DeltaTime;
+        }
+
+        protected virtual void LateUpdate()
+        {
+            FixedGameTimeTicker?.Invoke(Time.fixedDeltaTime);
         }
     }
 }

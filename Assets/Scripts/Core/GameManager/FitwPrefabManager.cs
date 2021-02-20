@@ -8,7 +8,7 @@ using Jmas;
 
 namespace Finw
 {
-    public class FinwPrefabManager: PrefabFactoryManager
+    public class FitwPrefabManager: PrefabFactoryManager
     {
         public NewYearFactory nyGenerator;
         public SubmarineGameFactory submarineGameFactory;
