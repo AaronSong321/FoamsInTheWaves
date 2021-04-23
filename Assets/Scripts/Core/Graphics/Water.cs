@@ -7,7 +7,7 @@ using Jmas;
 using UnityEngine;
 
 
-namespace Finw
+namespace Fitw
 {
     public class Water: WaveGenerator
     {

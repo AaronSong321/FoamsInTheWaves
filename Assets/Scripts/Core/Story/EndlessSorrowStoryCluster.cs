@@ -8,7 +8,7 @@ using Jmas;
 using Newtonsoft.Json;
 
 
-namespace Finw
+namespace Fitw
 {
     public class EndlessSorrowStoryCluster: StoryCluster
     {

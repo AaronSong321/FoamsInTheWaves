@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Jmas;
 
 
-namespace Finw.UI
+namespace Fitw.UI
 {
     public class PilotUI: UIBase
     {

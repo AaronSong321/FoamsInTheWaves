@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Jmas;
 
 
-namespace Finw
+namespace Fitw
 {
     public class FitwPrefabManager: PrefabFactoryManager
     {

@@ -8,7 +8,7 @@ using UnityEngine;
 using Object = UnityEngine.Object;
 
 
-namespace Finw
+namespace Fitw
 {
     public class FitwGameMode: GameMode
     {

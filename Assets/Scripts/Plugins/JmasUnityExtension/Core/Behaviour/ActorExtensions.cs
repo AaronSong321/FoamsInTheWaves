@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 
 namespace Jmas
@@ -35,6 +36,14 @@ namespace Jmas
                 task.GetAwaiter().GetResult();
             }
             #endif
+        }
+
+        public static void DestroyAllChildren(this GameObject o)
+        {
+            var t = o.transform;
+            foreach (Transform child in t) {
+                Object.Destroy(child.gameObject);
+            }
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Jmas
 
         public string GetPath()
         {
-            return Path.Combine(Application.persistentDataPath, "Players",  Owner.playerName, Name + GameSlotFileSuffix);
+            return Path.Combine(Application.persistentDataPath, "Players", Owner.playerName, Name + GameSlotFileSuffix);
         }
     }
 }

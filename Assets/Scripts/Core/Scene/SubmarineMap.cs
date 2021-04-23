@@ -1,7 +1,7 @@
 using UnityEngine;
 using Jmas;
 
-namespace Finw
+namespace Fitw
 {
     public class SubmarineMap : Map
     {

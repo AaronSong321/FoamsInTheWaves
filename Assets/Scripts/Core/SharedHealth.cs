@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 
 
-namespace Finw
+namespace Fitw
 {
     public class SharedHealth: ScriptableObject
     {

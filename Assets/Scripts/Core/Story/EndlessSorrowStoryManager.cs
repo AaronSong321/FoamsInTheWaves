@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,7 +8,7 @@ using Jmas;
 using UnityEngine;
 
 
-namespace Finw
+namespace Fitw
 {
     public class EndlessSorrowStoryManager: StoryManager
     {
@@ -19,11 +20,8 @@ namespace Finw
             base.SelfInitImpl();
             UseTestAccount();
             DontDestroyOnLoad(this);
-            var g = GetGameSlots(SessionAccount).ToArray();
-            // DeleteGameSlot("1");
-            var gs = g.Length is 0 ? CreateGameSlot((g.Length+1).ToString()): ChooseGameSlot(g[0].Name);
-            var fitw = FitwGameState.MakeDefault();
-            fitw.Save(gs);
         }
+
+        
     }
 }

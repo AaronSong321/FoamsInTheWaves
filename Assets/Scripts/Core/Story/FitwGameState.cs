@@ -7,7 +7,7 @@ using Jmas;
 using Newtonsoft.Json;
 
 
-namespace Finw
+namespace Fitw
 {
     [Serializable]
     public class FitwGameState: GameState
@@ -28,7 +28,7 @@ namespace Finw
             var mainStory = new EndlessSorrowStory() {
                 RandomInt = UnityEngine.Random.Range(0, 10000),
                 DisplayName = "Endless Sorrow",
-                Name = "Endless Sorrow"
+                Name = "Endless Sorrow",
             };
             
             var ch1 = new DummyChapter() {
@@ -51,6 +51,8 @@ namespace Finw
                 Parent = ch1
             };
             ch1.SceneStories = new StoryScene[] { ch1sc1, ch1sc2, ch1sc3 };
+
+            mainStory.Chapters = new Chapter[] { ch1 };
             
             var gs = new FitwGameState {
                 characterList = new Character[] { lm },

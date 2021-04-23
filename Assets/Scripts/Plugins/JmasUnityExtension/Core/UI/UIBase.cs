@@ -21,6 +21,10 @@ namespace Jmas
     public class UIBase: Actor
     {
         protected UIFinder Finder { get; set; }
+        protected virtual void SelfInitImpl()
+        {
+            Finder = new UIFinder(gameObject);
+        }
         public GameObject Node(string path)
         {
             return Finder.FindChild(path);

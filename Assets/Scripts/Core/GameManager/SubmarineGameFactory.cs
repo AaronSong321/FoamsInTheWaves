@@ -7,7 +7,7 @@ using Jmas;
 using UnityEngine;
 
 
-namespace Finw
+namespace Fitw
 {
     [CreateAssetMenu]
     public class SubmarineGameFactory: PrefabFactory

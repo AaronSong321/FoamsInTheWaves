@@ -46,12 +46,13 @@ namespace Jmas
             }
             else {
                 AccountCache = new List<Account>();
+                GameSerializer.SaveToFile(accountFilePath, AccountCache);
             }
         }
 
         private Account CreateNewAccount(string name, string password)
         {
-            var ac = Account.CreateAccount(name, password, 15);
+            var ac = Account.CreateAccount(name, password, 20);
             AccountCache.Add(ac);
             Directory.CreateDirectory(Directory.GetParent(accountFilePath).FullName);
             GameSerializer.SaveToFile(accountFilePath, AccountCache);
@@ -75,7 +76,7 @@ namespace Jmas
 
         public Account SignUp(string name, string password)
         {
-            if (Account.ContainsAccountIllegalChars(name))
+            if (Account.ContainsAccountIllegalChars(name) || HasAccount(name))
                 return null;
             SessionAccount = CreateNewAccount(name, password);
             GameSlotCache = new List<GameSlot>();
@@ -96,8 +97,9 @@ namespace Jmas
 
         protected virtual void SelfInitImpl()
         {
-            accountFilePath = Path.Combine(Application.persistentDataPath, "Players", "Account");
+            accountFilePath = Path.Combine(Application.persistentDataPath, "Players", "Accounts.bin");
             ReadAccounts();
+            DontDestroyOnLoad(this);
         }
 
         public IEnumerable<GameSlot> GetGameSlots(Account account)

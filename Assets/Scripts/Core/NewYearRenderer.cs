@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 using UnityEngine;
 
 
-namespace Finw
+namespace Fitw
 {
 
     public class NewYearRenderer: Actor
